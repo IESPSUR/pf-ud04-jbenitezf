@@ -1,0 +1,10 @@
+{% extends 'tienda/base.html' %}
+
+{% block lista %}
+	{% for producto in productos %}
+    <article>
+        {{ producto.nombre }}
+        {{ producto.precio }}
+    </article>
+{% endfor %}
+{% endblock %}
