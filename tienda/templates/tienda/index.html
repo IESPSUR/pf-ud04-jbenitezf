@@ -3,7 +3,9 @@
 {% block content %}
 	<h2>Bienvenido a la tienda virtual</h2>
 	<ul>
-		<li>Gestión de productos</li>
+		<li><a href="{% url 'ListaProducto'%}">
+            Gestión de productos
+        </a></li>
 		<li>Informes</li>
         <li><a href="{% url 'ListaProducto'%}">
 		    Realizar compra

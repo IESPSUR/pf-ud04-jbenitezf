@@ -1,10 +1,25 @@
 {% extends 'tienda/base.html' %}
 
 {% block lista %}
-	{% for producto in productos %}
-    <article>
-        {{ producto.nombre }}
-        {{ producto.precio }}
-    </article>
+    <a href="{% url 'producto_nuevo' %}"><button type="button" class="btn btn-primary">Nuevo</button></a><br><br>
+    <table>
+        <tr>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Modelo</th>
+            <th>Marca</th>
+            <th>Unidades</th>
+            <th>Acciones</th>
+        </tr>
+            {% for producto in productos %}
+                <tr>
+                    <td>{% if user.is_authenticated %}<a href="{% url 'producto_editar' pk=producto.pk %}">{% endif %}{{ producto.nombre }}{% if user.is_authenticated %}</a>{% endif  %}</td>
+                    <td>{{ producto.precio }}</td>
+                    <td>{{ producto.modelo }}</td>
+                    <td>{{ producto.marca }}</td>
+                    <td>{{ producto.unidades }}</td>
+                    <td><a href="{% url 'producto_eliminar' pk=producto.pk %}"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
+                </tr>
 {% endfor %}
+    </table>
 {% endblock %}
