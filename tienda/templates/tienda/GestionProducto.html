@@ -1,7 +1,7 @@
 {% extends 'tienda/base.html' %}
 
 {% block lista %}
-    <a href="{% url 'producto_nuevo' %}"><button type="button" class="btn btn-primary">Nuevo</button></a><br><br>
+    {% if user.is_authenticated %}<a href="{% url 'producto_nuevo' %}"><button type="button" class="btn btn-primary">Nuevo</button></a><br><br>{% endif %}
     <table>
         <tr>
             <th>Nombre</th>
@@ -18,7 +18,7 @@
                     <td>{{ producto.modelo }}</td>
                     <td>{{ producto.marca }}</td>
                     <td>{{ producto.unidades }}</td>
-                    <td><a href="{% url 'producto_eliminar' pk=producto.pk %}"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
+                    <td>{% if user.is_authenticated %}<a href="{% url 'producto_eliminar' pk=producto.pk %}"><button type="button" class="btn btn-danger">Eliminar</button></a>{% endif %}</td>
                 </tr>
 {% endfor %}
     </table>

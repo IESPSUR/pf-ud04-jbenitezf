@@ -1,0 +1,21 @@
+{% extends 'tienda/base.html' %}
+
+{% block lista %}
+    <h1 id="titulo">Catálogo</h1>
+    <div class="contenedortarjetas">
+        {% for producto in productos %}
+            <div class="tarjetaproducto">
+                <div>
+                    {{ producto.nombre }}<br>
+                    {{ producto.marca }}
+                    {{ producto.modelo }}
+                </div>
+                {{ producto.precio }}€
+                <div class="BotonesTarjetas">
+                    <a href="{% url 'producto_comprar'%}"><button type="button" class="btn btn-danger">Comprar</button></a>
+                    <a href="{% url 'producto_comprar'%}"><button type="button" class="btn btn-primary">Saber más</button></a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

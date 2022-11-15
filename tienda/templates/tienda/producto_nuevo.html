@@ -4,6 +4,7 @@
     <h2>Nuevo producto</h2>
     <form method="POST" class="post-form">{% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="save btn btn-secondary">Guardar</button>
+        <button type="submit" class="save btn btn-primary">Guardar</button>
+        <a href="{% url 'GestionProducto' %}"><button type="button" class="btn btn-secondary">Cancelar</button></a>
     </form>
 {% endblock %}
