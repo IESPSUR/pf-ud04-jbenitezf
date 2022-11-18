@@ -1,18 +1,22 @@
 from django import forms
 from .models import Producto, Compra
+import calculation
+
 
 class ProductoForm(forms.ModelForm):
-     class Meta:
+    class Meta:
         model = Producto
         fields = ('nombre', 'modelo', 'unidades', 'precio', 'detalles', 'marca',)
 
+
 class CompraForm(forms.ModelForm):
+    precio = forms.DecimalField(disabled=True)
+    unidades = forms.DecimalField()
+    importe = forms.DecimalField(
+        widget=calculation.FormulaInput('unidades*precio')
+    )
     class Meta:
         model = Compra
-        fields = ('unidades','importe',)
+        model = Producto
+        fields = ('precio',)
 
-    def clean(self, *args, **kwargs):
-        cleaned_data = super(CompraForm, self).clean(*args, **kwargs)
-        unidades = cleaned_data.get('unidades')
-        if unidades <= Producto.unidades :
-            self.add_error('unidades', 'Las unidades deben se igual o menor a las disponibles')
