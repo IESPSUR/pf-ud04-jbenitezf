@@ -1,7 +1,8 @@
-from django.shortcuts import render, get_object_or_404
-from .models import Producto
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import Producto, Compra, Marca
 from .forms import ProductoForm, CompraForm
 from django.utils import timezone
+from django.contrib import messages
 
 
 # Create your views here.
@@ -52,14 +53,26 @@ def producto_comprar(request,pk):
     if request.method == "POST":
         form = CompraForm(request.POST, instance=producto)
         if form.is_valid():
-            compra = form.save(commit=False)
-            compra.producto = producto
-            compra.fecha = timezone.now()
-            compra.save()
-            producto.unidades = producto.unidades-compra.unidades
-            producto.save();
+            unidades = form.cleaned_data['unidades']
+            importe = form.cleaned_data['importe']
+
+            if producto.unidades < unidades :
+                return redirect('producto_comprar',pk)
+            else:
+                Compra.objects.create(fecha=timezone.now(), importe=importe, unidades=unidades, producto=producto)
+                producto.unidades = producto.unidades-unidades
+                producto.save();
+
             productos = Producto.objects.filter().order_by('nombre')
             return render(request, 'tienda/CompraProducto.html', {'productos': productos})
     else:
         form = CompraForm(instance=producto)
     return render(request, 'tienda/producto_compra.html', {'form': form})
+
+
+def informes(request):
+    return render(request, 'tienda/informes.html')
+
+def marcas(request):
+    marca = Marca.objects.filter().order_by('nombremarca')
+    return render(request, 'tienda/Marcas.html', {'marca': marca})

@@ -24,11 +24,7 @@ class Compra(models.Model):
     fecha = models.DateTimeField(default=timezone.now)
     producto = models.ForeignKey(Producto, models.PROTECT)
     unidades = models.IntegerField()
-    importe = models.IntegerField()
-
-    def publish(self):
-        self.published_date = timezone.now()
-        self.save()
+    importe = models.FloatField()
 
     def __str__(self):
-        return self.importe
+        return self.producto.nombre

@@ -1,0 +1,23 @@
+{% extends 'tienda/base.html' %}
+
+{% block lista %}
+    <h2>Tipos de informes</h2>
+	<ul>
+		<a href="{% url 'marcas' %}" class="btn btn-primary">
+            MARCAS
+        </a>
+		<a href="" class="btn btn-primary">
+            TOP 10 PRODUCTO
+        </a>
+        <a href="" class="btn btn-primary">
+		    COMPRAS POR USUARIO
+        </a>
+        <a href="" class="btn btn-primary">
+		    TOP 10 USUARIO
+        </a>
+	</ul>
+
+    {% block informes %}
+    {% endblock %}
+
+{% endblock %}
