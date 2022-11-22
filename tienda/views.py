@@ -48,6 +48,9 @@ def CompraProducto(request):
     productos = Producto.objects.filter().order_by('nombre')
     return render(request, 'tienda/CompraProducto.html', {'productos': productos})
 
+def saber_mas(request, pk):
+    producto = get_object_or_404(Producto, pk=pk)
+    return render(request, 'tienda/saber_mas.html', {'producto' : producto})
 def producto_comprar(request,pk):
     producto = get_object_or_404(Producto, pk=pk)
     if request.method == "POST":
@@ -62,13 +65,15 @@ def producto_comprar(request,pk):
                 Compra.objects.create(fecha=timezone.now(), importe=importe, unidades=unidades, producto=producto)
                 producto.unidades = producto.unidades-unidades
                 producto.save();
+                return redirect('checkout', pk);
 
-            productos = Producto.objects.filter().order_by('nombre')
-            return render(request, 'tienda/CompraProducto.html', {'productos': productos})
     else:
         form = CompraForm(instance=producto)
     return render(request, 'tienda/producto_compra.html', {'form': form})
 
+def checkout(request, pk):
+    producto = get_object_or_404(Producto, pk=pk)
+    return render(request, 'tienda/checkout.html', {'producto' : producto})
 
 def informes(request):
     return render(request, 'tienda/informes.html')
@@ -76,3 +81,7 @@ def informes(request):
 def marcas(request):
     marca = Marca.objects.filter().order_by('nombremarca')
     return render(request, 'tienda/Marcas.html', {'marca': marca})
+
+def productos_in_marcas(request, nombremarca):
+    producto = Producto.objects.all().filter(marca__nombremarca=nombremarca)
+    return render(request, 'tienda/Informe_marca.html', {'productos': producto})

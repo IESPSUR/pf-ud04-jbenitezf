@@ -1,0 +1,22 @@
+{% extends 'tienda/base.html' %}
+
+{% block lista %}
+
+    <div id="contenedor_productos">
+            <aside></aside>
+            <article>
+                <section id="informacion_producto">
+                  <h1> {{ producto.nombre }} {{ producto.modelo }} </h1><br>
+                  <h2> {{ producto.marca }} </h2><br>
+                  <h2>Descripción:</h2>
+                  <h4> &nbsp;&nbsp;&nbsp;&nbsp;{{ producto.detalles }} </h4><br>
+                  <h1> {{ producto.precio }} €</h1><br>
+                  <div><a href="{% url 'producto_comprar' pk=producto.pk%}"><button type="button" class="btn btn-danger">Comprar</button></a>
+                      <a href="{% url 'CompraProducto' %}"><button type="button" class="btn btn-primary">Volver al Catálogo</button></a></div>
+                </section>
+            </article>
+
+            <aside></aside>
+    </div>
+
+{% endblock %}

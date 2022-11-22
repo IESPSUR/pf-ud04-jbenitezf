@@ -1,8 +1,11 @@
-{% extends 'tienda/base.html' %}
+{% extends 'tienda/Marcas.html' %}
 
-{% block lista %}
-    <h1 id="titulo">Catálogo</h1>
+{% block listaproductos %}
+    <br><br>
+        <h1>{{ producto.marca }}</h1>
+
     <div class="contenedortarjetas">
+
         {% for producto in productos %}
             <div class="tarjetaproducto">
                 <div>
@@ -12,8 +15,8 @@
                 </div>
                 {{ producto.precio }}€
                 <div class="BotonesTarjetas">
-                    <a href="{% url 'producto_comprar' pk=producto.pk%}"><button type="button" class="btn btn-danger">Comprar</button></a>
-                    <a href="{% url 'saber_mas' pk=producto.pk%}"><button type="button" class="btn btn-primary">Saber más</button></a>
+                    <a href="{% url 'producto_comprar' pk=producto.nombre%}"><button type="button" class="btn btn-danger">Comprar</button></a>
+                    <a href="{% url 'producto_comprar' pk=producto.nombre%}"><button type="button" class="btn btn-primary">Saber más</button></a>
                 </div>
             </div>
         {% endfor %}

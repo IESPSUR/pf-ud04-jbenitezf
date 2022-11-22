@@ -1,0 +1,20 @@
+{% extends 'tienda/base.html' %}
+
+{% block lista %}
+
+    <div id="contenedor_productos">
+            <aside></aside>
+            <article>
+                <section id="informacion_producto">
+                  <h1> {{ producto.nombre }} </h1><br><br>
+                  <h2> {{ producto.modelo }} </h2><br>
+                  <h2> {{ producto.marca }} </h2><br>
+                  <h2>Descripción:</h2>
+                  <h4> &nbsp;&nbsp;&nbsp;&nbsp; {{ producto.detalles }} </h4><br>
+                  <h1> {{ producto.precio }} €</h1>
+                </section>
+            </article>
+            <aside></aside>
+    </div>
+
+{% endblock %}
