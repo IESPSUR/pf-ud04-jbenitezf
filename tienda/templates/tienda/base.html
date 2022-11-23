@@ -1,5 +1,4 @@
 {% load static %}
-<html lang="es">
 <head>
     <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,19 +7,18 @@
     <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{% static 'css/tienda.css' %}">
 </head>
-<div>
-<div class="page-header">
-		<h1><a href="/">Tienda Virtual</a></h1>
-    	</div>
-    	<div class="container-fluid">
-        	<div class="row">
-            		<div class="col">
-            			{% block content %}
-            			{% endblock %}
-            		</div>
-        	</div>
-    	</div>
-</div>
+<body>
+            <div class="page-header">
+                    <h1><a href="/">Tienda Virtual</a></h1>
+            </div>
+                <div class="container-fluid">
+                    <div class="row">
+                            <div class="col">
+                                {% block content %}
+                                {% endblock %}
+                            </div>
+                    </div>
+                </div>
         <div>
             {% block lista %}
             {% endblock %}

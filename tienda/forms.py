@@ -19,4 +19,3 @@ class CompraForm(forms.ModelForm):
         model = Compra
         model = Producto
         fields = ('precio',)
-

@@ -26,5 +26,6 @@ class Compra(models.Model):
     unidades = models.IntegerField()
     importe = models.FloatField()
 
+
     def __str__(self):
         return self.producto.nombre

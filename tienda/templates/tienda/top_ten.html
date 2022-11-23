@@ -1,0 +1,9 @@
+{% extends 'tienda/informes.html' %}
+
+{% block informes %}
+    {% for producto in productos %}
+        <h1>Nombre: {{ producto.producto__nombre }}</h1>
+        <p>Unidades: {{ producto.unidades }}</p>
+
+    {% endfor %}
+{% endblock %}

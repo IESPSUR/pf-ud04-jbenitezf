@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Producto, Compra, Marca
 from .forms import ProductoForm, CompraForm
 from django.utils import timezone
-from django.contrib import messages
+from django.db.models import Sum
 
 
 # Create your views here.
@@ -85,3 +85,9 @@ def marcas(request):
 def productos_in_marcas(request, nombremarca):
     producto = Producto.objects.all().filter(marca__nombremarca=nombremarca)
     return render(request, 'tienda/Informe_marca.html', {'productos': producto})
+
+def top_ten(request):
+    producto = Compra.objects.values('producto__nombre').annotate(unidades=Sum('unidades')).order_by('-unidades')[:10]
+    productos = list(producto)
+
+    return render(request, 'tienda/top_ten.html', {'productos': productos})
